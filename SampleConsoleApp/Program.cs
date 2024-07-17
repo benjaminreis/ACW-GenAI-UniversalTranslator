@@ -32,7 +32,7 @@ class Program
         var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
 
         // FIRST API CALL
-        HttpResponseMessage response = await client.PostAsync($"{Configuration["AzureTranslateURL"]}?to=en", content);
+        HttpResponseMessage response = await client.PostAsync($"{Configuration["AzureTranslateURL"]}/translate?api-version=3.0&to=en", content);
         // Read and deserialize the response
         var responseString = await response.Content.ReadAsStringAsync();
         responseString = responseString.Substring(1, responseString.Length - 2); 
@@ -94,7 +94,7 @@ class Program
         var content3 = new StringContent(JsonSerializer.Serialize(body3), Encoding.UTF8, "application/json");
 
         // THIRD API CALL
-        HttpResponseMessage response3 = await client3.PostAsync($"{Configuration["AzureTranslateURL"]}?to={firstResponseBody?.detectedLanguage?.language}", content3);
+        HttpResponseMessage response3 = await client3.PostAsync($"{Configuration["AzureTranslateURL"]}/translate?api-version=3.0&to={firstResponseBody?.detectedLanguage?.language}", content3);
         // Read and deserialize the response
         var responseString3 = await response3.Content.ReadAsStringAsync();
         responseString = responseString3.Substring(1, responseString3.Length - 2); 
